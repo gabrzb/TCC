@@ -1,0 +1,45 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Meu App Simples</h1>
+    
+    <button onclick="cumprimentar()">Dizer Olá</button>
+    
+    <div id="resultado"></div>
+
+    <script>
+        async function cumprimentar() {
+            try {
+                const response = await fetch('http://localhost:5000/');
+                const data = await response.json();
+                document.getElementById('resultado').innerHTML = 
+                    `<strong>${data.mensagem}</strong><br>Hora: ${data.hora}`;
+            } catch (error) {
+                document.getElementById('resultado').innerHTML = 'Erro ao conectar com o Python';
+            }
+        }
+    </script>
+</body>
+</html>
