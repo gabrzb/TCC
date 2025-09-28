@@ -1,0 +1,36 @@
+<div class="page-content">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h2>🔍 Análise de Produto Amazon</h2>
+        <p>Cole a URL de qualquer produto Amazon.com.br para extrair dados e avaliações automaticamente.</p>
+        
+        <div class="registration-form" id="form-link">
+            <div class="form-group">
+                <label for="url">
+                    <strong>📋 URL do Produto Amazon:</strong>
+                </label>
+                <input type="url" id="url" name="url" 
+                       placeholder="https://www.amazon.com.br/.../dp/..." 
+                       style="width: 100%; font-size: 14px; padding: 12px;">
+                <small style="color: var(--text-medium); margin-top: 5px; display: block;">
+                    💡 Exemplo: https://www.amazon.com.br/Produto/dp/B0EXEMPLO123
+                </small>
+            </div>
+            
+            <button type="button" class="submit-button" id="btn-analisar" 
+                    style="width: 100%; padding: 15px; font-size: 16px;">
+                🚀 Iniciar Análise do Produto
+            </button>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(59, 130, 246, 0.1); border-radius: 8px;">
+                <strong>ℹ️ Como funciona:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>O sistema abre automaticamente o navegador</li>
+                    <li>Extrai informações do produto e avaliações</li>
+                    <li>Gera arquivos CSV com os dados coletados</li>
+                    <li>Tempo estimado: 2-5 minutos</li>
+                </ul>
+            </div>
+        </div>
+        <div id="resultado" style="margin-top: 25px;"></div>
+    </div>
+</div>

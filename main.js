@@ -59,16 +59,20 @@ app.whenReady().then(() => {
 
 function criarJanela() {
     janela = new BrowserWindow({
-        width: 600,
-        height: 400,
-        webPreferences: {
-            nodeIntegration: false,
-            contextIsolation: true
-        }
+        width: 800,
+        height: 600,
+        minHeight: 300,
+        minWidth: 700,
+        show: false
     });
-    
+
     janela.loadFile('index.html');
     console.log('Janela do Electron aberta!');
+
+    janela.on('ready-to-show', () => {
+        janela.maximize();
+        janela.show();
+    });
 }
 
 // Fechar Python quando Electron fechar
