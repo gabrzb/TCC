@@ -5,6 +5,7 @@ import os
 import re
 import uuid
 import subprocess
+from src import ai_analyzer
 
 app = Flask(__name__)
 
@@ -55,12 +56,24 @@ def executar_rpa_em_separado(url_produto, process_id):
         
         # Verifica resultado
         if result.returncode == 0:
+            # RPA terminou, agora roda análise de sentimento
+            
+            atualizar_progresso(process_id, 80, "Executando análise de sentimentos")
+            import pandas as pd
+            df = pd.read_csv('amazon_data/amazon_reviews.csv')
+            df['sentimento'] = df['review_text'].apply(ai_analyzer.classificar_sentimento)
+            df.to_csv('amazon_data/resultado.csv', index=False)
+            print("Arquivo 'resultado.csv' gerado com sucesso!")
+            
             atualizar_progresso(process_id, 100, "Processamento concluído com sucesso", "concluido")
             return True
         else:
             atualizar_progresso(process_id, 0, f"Erro no RPA: {result.stderr}", "erro")
             return False
-            
+
+    except Exception as e:
+        atualizar_progresso(process_id, 0, f"Erro na análise de sentimentos: {e}", "erro")
+        return False
     except subprocess.TimeoutExpired:
         erro_msg = "RPA excedeu o tempo limite (5 minutos)"
         atualizar_progresso(process_id, 0, erro_msg, "erro")
